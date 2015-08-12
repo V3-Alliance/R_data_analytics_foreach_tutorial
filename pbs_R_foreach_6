@@ -1,0 +1,58 @@
+#!/bin/bash
+
+# pbs launching script R job:
+# Uses the snow/parallel package so it runs on multiple CPUs.
+#			by Richard (Aug 2015)     
+
+#     job name:
+#PBS -N tutorial_foreach_6
+
+#     how many cpus?
+#PBS -l nodes=16
+
+#     How long to run the job? (hours:minutes:seconds)
+#PBS -l walltime=0:30:0
+
+#     Name of output file:
+#PBS -o tutorial_foreach_6.out
+
+#     Environmental variables to make it work:
+ 
+# Specify your email address to be notified of progress.
+#PBS -M rrothwell@v3.org.au
+# To receive an email:
+#       - job is abored: 'a' 
+#       - job begins execution: 'b'
+#       - job terminates: 'e'
+#       Note: Please ensure that the PBS -M option above is set.
+#
+#PBS -m abe
+
+module load R
+cd $PBS_O_WORKDIR
+
+# Join the output and error streams so we can view them together using qpeek 
+#PBS -j oe
+ 
+# Launch the job!
+
+R --vanilla CMD BATCH tutorial_foreach_6.R
+
+# Keep on eye on things by using these commands.
+# Replace {job_id} with the actual job id see using qstat. 
+
+# View the output log.
+# $ qpeek {job_id}
+
+# View the error log.
+# $ qpeek -e {job_id}
+
+# View the start of the output log.
+# $ qpeek -h {job_id}
+
+
+# View the end of the output log.
+# $ qpeek -t {job_id}
+
+# View the end of the output log with updates. Ctrl-C ends this.
+# $ qpeek -f {job_id}
