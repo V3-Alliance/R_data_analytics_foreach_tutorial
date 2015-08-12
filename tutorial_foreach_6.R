@@ -56,9 +56,9 @@ start_time <- Sys.time()
 iteration_count <- 100
 
 max_eigenvalues <- foreach(iteration_index = 1:iteration_count, .combine='cbind') %dopar% {
+	cat("Dimension: ", iteration_index)
 	eigenvalue = max_eigenvalue(iteration_index, 200)
 	eigenvalue_pair = c(iteration_index, eigenvalue)
-	cat("Dimension: ", iteration_index)
 }
  
 # Benchmark stop time and report duration.
@@ -68,7 +68,7 @@ print(Sys.time() - start_time)
 stopCluster(cluster)
 
 # Report calculation results.
-sink("tutorial_foreach_6.out") # Redirect console output to the named file
+sink("tutorial_foreach_6.result") # Redirect console output to the named file
 max_eigenvalues
 sink() # Restore output to the console
  

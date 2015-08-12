@@ -62,6 +62,6 @@ print(Sys.time() - start_time)
 # Time difference typically around 10 mins
 
 # Report calculation results.
-sink("tutorial_foreach_3.out") # Redirect console output to the named file
+sink("tutorial_foreach_3.result") # Redirect console output to the named file
 summaries
 sink() # Restore output to the console

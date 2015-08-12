@@ -64,7 +64,7 @@ print(Sys.time() - start_time)
 stopCluster(cluster)
 
 # Report calculation results.
-sink("tutorial_foreach_5.out") # Redirect console output to the named file
+sink("tutorial_foreach_5.result") # Redirect console output to the named file
 summaries
 sink() # Restore output to the console
  

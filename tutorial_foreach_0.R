@@ -35,6 +35,6 @@ for (iteration_index in 1:iteration_count) {
 cat("Duration/sec: ", Sys.time() - start_time)
 
 # Report summary results.
-sink("tutorial_foreach_0.out") # Redirect console output to the named file
+sink("tutorial_foreach_0.result") # Redirect console output to the named file
 summaries
 sink() # Restore output to the console
