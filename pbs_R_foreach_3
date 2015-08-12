@@ -2,7 +2,6 @@
 
 # pbs launching script R job:
 # Uses the multicore package so it runs on one CPU only.
-#			by Richard (Aug 2015)     
 
 #     job name:
 #PBS -N tutorial_foreach_3
@@ -19,7 +18,7 @@
 #     Environmental variables to make it work:
  
 # Specify your email address to be notified of progress.
-#PBS -M rrothwell@v3.org.au
+#PBS -M your_name@your_organisation.org
 # To receive an email:
 #       - job is abored: 'a' 
 #       - job begins execution: 'b'
