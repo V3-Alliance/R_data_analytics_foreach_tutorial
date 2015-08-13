@@ -21,6 +21,7 @@ iteration_count <- 10
 # Storage is generally allocated in one go to improve performance.
 summaries <- vector('list', length = iteration_count)
 
+cat("Starting job!\n")
 # Generate some random numbers, derive a summary object and collect the summary objects.
 for (iteration_index in 1:iteration_count) { 
     cat("Iteration: ", iteration_index,'\n') 

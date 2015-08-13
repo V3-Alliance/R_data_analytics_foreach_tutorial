@@ -7,16 +7,26 @@
 #PBS -N foreach_6
 
 #     how many cpus?
-#PBS -l nodes=16
+#PBS -l nodes=16:ppn=8
+
+#      how much memory
+#PBS -l mem=2G
 
 #     How long to run the job? (hours:minutes:seconds)
 #PBS -l walltime=0:30:0
 
-#     Name of output file:
+# Inherit the correct environment variables
+#PBS -V
+
+#     Name of output file. 
+# The contents of the log file that is viewed by qpeek 
+# will be copied to this file at the end of the job.
 #PBS -o tutorial_foreach_6.out
+# Join the output and error streams so we can view them together using qpeek 
+#PBS -j oe
 
 #     Environmental variables to make it work:
- 
+
 # Specify your email address to be notified of progress.
 #PBS -M your_name@your_organisation.org
 # To receive an email:
@@ -27,18 +37,26 @@
 #
 #PBS -m abe
 
-# Join the output and error streams so we can view them together using qpeek 
-#PBS -j oe
-
 module load R
 cd $PBS_O_WORKDIR
  
-# Launch the job!
+#     Launching the job!
 
-R --vanilla CMD BATCH tutorial_foreach_6.R
+# Sends R console to tutorial_foreach_6.Rout
+#R --vanilla CMD BATCH tutorial_foreach_6.R
+
+# OR sends R console output to std out so it can be seen at the log file viewed by qpeek.
+R --vanilla < tutorial_foreach_6.R
 
 # Keep on eye on things by using these commands.
 # Replace {job_id} with the actual job id see using qstat. 
+# $ qstat -u my_username will give an output like:
+
+# Job ID               Username    Queue    Jobname          SessID NDS   TSK    Memory   Time   S   Time
+# -------------------- ----------- -------- ---------------- ------ ----- ------ ------ -------- - --------
+# 467084.trifid-m.     rrothwell   run_1_we foreach_3         12569     1      4    --  00:30:00 R      -- 
+
+# In this case substitute {job_id} with 467084
 
 # View the output log.
 # $ qpeek {job_id}
@@ -48,7 +66,6 @@ R --vanilla CMD BATCH tutorial_foreach_6.R
 
 # View the start of the output log.
 # $ qpeek -h {job_id}
-
 
 # View the end of the output log.
 # $ qpeek -t {job_id}

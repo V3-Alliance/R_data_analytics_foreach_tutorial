@@ -49,8 +49,10 @@ start_time <- Sys.time()
 iteration_count <- 1000
 
 # Ensure package doMC is loaded.
-summaries <- foreach(1:iteration_count, .packages='doMC') %dopar% {
+cat("Starting job!\n")
+summaries <- foreach(iteration_index = 1:iteration_count, .packages='doMC') %dopar% {
     # Code to be executed on cores
+	cat("Iteration: ", iteration_index, "\n")
     random_numbers <- runif(1000000, 0, 1)
     summary_result <- summary(random_numbers)
     summary_result         

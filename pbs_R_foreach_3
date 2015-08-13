@@ -9,11 +9,15 @@
 #     how many cpus?
 #PBS -l nodes=1:ppn=4
 
+#      how much memory
+#PBS -l mem=1G
+
 #     How long to run the job? (hours:minutes:seconds)
 #PBS -l walltime=0:30:0
 
 #     Name of output file:
 #PBS -o tutorial_foreach_3.out
+#PBS -j oe
 
 #     Environmental variables to make it work:
  
@@ -27,14 +31,15 @@
 #
 #PBS -m abe
 
-# Join the output and error streams so we can view them together using qpeek 
-#PBS -j oe
-
 module load R
 cd $PBS_O_WORKDIR
  
 #     Launching the job!
 
-R --vanilla CMD BATCH tutorial_foreach_3.R
+# Sends R console to tutorial_foreach_3.Rout
+#R --vanilla CMD BATCH tutorial_foreach_3.R
+
+# OR sends R console output to std out so it can be seen at the log file viewed by qpeek.
+R --vanilla < tutorial_foreach_3.R
 
 

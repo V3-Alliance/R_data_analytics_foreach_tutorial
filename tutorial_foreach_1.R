@@ -18,12 +18,16 @@ library(ggplot2)
 # Define a function to benchmark.
 calculation_under_test <- function(iteration_count) {
 
+	cat("Starting job: ", iteration_count, "\n")
+
     # Allocate space for summary objects to be returned - not actually used.
     # Storage is generally allocated in one go to improve performance.
     summaries <- vector('list', length = iteration_count)
     
     # Generate some random numbers then derive a summary object.
     for(iteration_index in 1:iteration_count) {
+
+        cat("Iteration: ", iteration_index,'\n') 
      
         # 1 million uniform random numbers in the range 0 to 1
         random_numbers <- runif(1000000, 0, 1)

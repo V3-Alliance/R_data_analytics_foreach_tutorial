@@ -32,7 +32,10 @@ library(doParallel)
 # ============================================================
  
 # Startup cluster to use 16 processors
-cluster <- makeCluster(16)
+# Outfile is set to blank to prevent the slave nodes from dumping output.
+# This will allow qpeek <job_id> to show the output from the nodes.
+# though the qpeek output will be a mixed up from all the nodes. 
+cluster <- makeCluster(16, outfile="")
 registerDoParallel(cluster)
 
 # Just to reassure ourselves.
@@ -50,11 +53,13 @@ iteration_count <- 1000
 # Uncomment this fragment if the package doParallel is NOT already installed on the cluster nodes.
 #summaries <- foreach(1:iteration_count, .packages='doParallel') %dopar% {
 
-summaries <- foreach(1:iteration_count, .combine='rbind') %dopar% {
+cat("Starting job!\n")
+summaries <- foreach(iteration_index = 1:iteration_count, .combine='rbind') %dopar% {
     # Code to be executed on nodes.
+    cat("Process ID", Sys.getpid(), "Iteration: ", iteration_index, "\n")
     random_numbers <- runif(1000000, 0, 1)
     summary_result <- summary(random_numbers)
-    summary_result
+    summary_result    
 }
  
 # Benchmark stop time and report duration.

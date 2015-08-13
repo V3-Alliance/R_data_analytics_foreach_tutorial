@@ -44,8 +44,15 @@ library(doParallel)
 # ============================================================
 
 # Startup cluster to use 16 processors
-cluster <- makeCluster(16)
+# Outfile is set to blank to prevent the slave nodes from dumping output.
+# This will allow qpeek <job_id> to show the output from the nodes.
+# though the qpeek output will be a mixed up from all the nodes. 
+cluster <- makeCluster(16, outfile="")
 registerDoParallel(cluster)
+
+# Just to reassure ourselves.
+print (getDoParWorkers())
+getDoParName()
  
 # Benchmark start time.
 start_time <- Sys.time()
@@ -55,8 +62,9 @@ start_time <- Sys.time()
 # Iteration count for calculation.
 iteration_count <- 100
 
+cat("Starting job!\n")
 max_eigenvalues <- foreach(iteration_index = 1:iteration_count, .combine='cbind') %dopar% {
-	cat("Dimension: ", iteration_index)
+    cat("Process ID", Sys.getpid(), "Iteration: ", iteration_index, "\n")
 	eigenvalue = max_eigenvalue(iteration_index, 200)
 	eigenvalue_pair = c(iteration_index, eigenvalue)
 }
