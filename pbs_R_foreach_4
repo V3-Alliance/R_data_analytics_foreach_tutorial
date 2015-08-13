@@ -4,7 +4,7 @@
 # Uses the multicore package so it runs on one CPU only.
 
 #     job name:
-#PBS -N tutorial_foreach_4
+#PBS -N foreach_4
 
 #     how many cpus?
 #PBS -l nodes=1:ppn=8
@@ -26,6 +26,9 @@
 #       Note: Please ensure that the PBS -M option above is set.
 #
 #PBS -m abe
+
+# Join the output and error streams so we can view them together using qpeek 
+#PBS -j oe
 
 module load R
 cd $PBS_O_WORKDIR

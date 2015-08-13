@@ -4,7 +4,7 @@
 # Uses the snow/parallel package so it runs on multiple CPUs.
 
 #     job name:
-#PBS -N tutorial_foreach_5
+#PBS -N foreach_5
 
 #     how many cpus?
 #PBS -l nodes=16
@@ -26,6 +26,9 @@
 #       Note: Please ensure that the PBS -M option above is set.
 #
 #PBS -m abe
+
+# Join the output and error streams so we can view them together using qpeek 
+#PBS -j oe
 
 module load R
 cd $PBS_O_WORKDIR
