@@ -1,4 +1,4 @@
-# R_data_analytics_foreach_tutorial
+# R Data Analytics "foreach" Tutorial
 
 Tutorials that exercise the features of the R foreach package for HPC data analytics.
 
